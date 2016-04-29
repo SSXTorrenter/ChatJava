@@ -1,7 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Rodriguez Thomas
+ * @version 1.2
  */
 package presentation;
 
@@ -12,10 +12,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import metier.ListeMessage;
 
-/**
- *
- * @author thomas
- */
+
 public class FrmChat extends javax.swing.JFrame {
 
     User friend = new User(-1,null);

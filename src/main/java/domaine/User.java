@@ -1,18 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Rodriguez Thomas
+ * @version 1.2
  */
 package domaine;
 import java.util.*;
 
-/**
- *
- * @author thomas
- */
 public class User {
-  private int id;        /* Identifiant */
-  private String login;    /* Nom */
+  private int id;       
+  private String login;
 
   /** Constructeur */
   public User (int id, String login) {
@@ -25,9 +21,6 @@ public class User {
   /** Accesseurs */
   public int getId () {return id;}
   public String getLogin () {return login;}
-
-  @Override
-  public boolean equals (Object obj) {return ((User)obj).id == id;}
   
   @Override
   public String toString(){ return login;}

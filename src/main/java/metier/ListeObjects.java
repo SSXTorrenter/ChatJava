@@ -1,18 +1,12 @@
-/************************************************/
-/**** CETTE CLASSE NE DOIT PAS ÊTRE MODIFIÉE ****/
-/************************************************/
+/**
+ *
+ * @author Rodriguez Thomas
+ * @version 1.2
+ */
 package metier;
 
 import java.util.ArrayList;
 
-/**
- * Liste d'Objects avec une position courante
- * - abstract: aucune instance de ce composant ne doit être créée
- * - visibilité package: outil de base pour créer des listes spécialisées dans le package.
- *
- * @author Peter DAEHNE - HEG Genève
- * @version 1.2
- */
 abstract class ListeObjects {
 
   public static final int NO_POS = -1; /* Valeur de la position courante non définie */

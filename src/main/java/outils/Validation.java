@@ -1,23 +1,17 @@
+/**
+ *
+ * @author Rodriguez Thomas
+ * @version 1.2
+ */
 
 package outils;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.UnknownHostException;
-import javax.swing.JOptionPane;
-import static presentation.FrmLoading.getConnection;
-import presentation.FrmServer;
 
-
-/**
- * Outils de validation de nombres
- *
- * @author RODRIGUEZ-VELDHUIS Thomas
- * @version Version 1.1
-*/
 public class Validation {
 
   /* Retourne true ssi le String str est un int valide */

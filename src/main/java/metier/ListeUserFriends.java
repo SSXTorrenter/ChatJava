@@ -1,16 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Rodriguez Thomas
+ * @version 1.2
  */
 package metier;
 import domaine.User;
 import base.UserDao;
 
-/**
- *
- * @author thomas
- */
 public class ListeUserFriends extends ListeObjects{
     public ListeUserFriends (int id) {liste = UserDao.getListeUser(id);}
   

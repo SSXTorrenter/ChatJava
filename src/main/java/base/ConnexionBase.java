@@ -1,20 +1,15 @@
-/************************************************/
-/**** CETTE CLASSE NE DOIT PAS ÊTRE MODIFIÉE ****/
-/************************************************/
+/**
+ *
+ * @author Rodriguez Thomas
+ * @version 1.2
+ */
 package base;
 
 import base.mysql.Outils;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-/**
- * 634.1-Programmation / TP P05
- * 
- * Modélise la connexion à la base
- *
- * @author RODRIGUEZ-VELDHUIS Thomas
- * @version 1.2
- */
+
 public class ConnexionBase {
 
   private static final String NOM_BASE = "Chat"; /* Nom de la base de données */

@@ -1,17 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Rodriguez Thomas
+ * @version 1.2
  */
 package presentation;
 import base.ConnexionBase;
 import base.UserDao;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author thomas
- */
+
 public class FrmLogin extends javax.swing.JFrame {
 
     private static FrmLogin uniqueInstance = null;

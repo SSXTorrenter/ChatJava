@@ -1,3 +1,8 @@
+/**
+ *
+ * @author Rodriguez Thomas
+ * @version 1.2
+ */
 package presentation;
 
 public class Main {
