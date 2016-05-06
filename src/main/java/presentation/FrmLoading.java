@@ -1,7 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Rodriguez Thomas
+ * @version 1.2
  */
 package presentation;
 import base.ConnexionBase;
@@ -11,16 +11,12 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import outils.Validation;
 
-/**
- *
- * @author thomas
- */
 public class FrmLoading extends javax.swing.JFrame {
 
     private static FrmLoading uniqueInstance = null;
     FrmMain frmMain; 
-    public String[] ADDRESSES = {"IPorURL","IPorURL"};
-    public int[] PORTS = {1,1};
+    public String[] ADDRESSES = {"192.168.1.205","ssxtorrenter.ddns.net"};
+    public int[] PORTS = {3306,3306};
     /**
      * Creates new form FrmLoading
      */
@@ -110,26 +106,21 @@ public class FrmLoading extends javax.swing.JFrame {
     
     public static boolean getConnection(String address, int port){
         FrmMain.setServer(address,port);
-        try {
-                if (Validation.pingHost(address, port)) {
-                    if (ConnexionBase.get()!=null) {
-                        System.out.println(" succed.");
-                        ConnexionBase.close();
-                        FrmMain.setServer(address, port);
-                        FrmMain.setConnectionStat(true);
-                        return true;
-                    }else{
-                        System.out.print(" failed, could not connect to server.");
-                        return false;
-                    }
-                }else{
-                    System.out.println(" failed, could not ping.");
-                    return false;
-                }
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(FrmLoading.class.getName()).log(Level.SEVERE, null, ex);
+        if (Validation.pingHost(address, port)) {
+            if (ConnexionBase.get()!=null) {
+                System.out.println(" succed.");
+                ConnexionBase.close();
+                FrmMain.setServer(address, port);
+                FrmMain.setConnectionStat(true);
+                return true;
+            }else{
+                System.out.print(" failed, could not connect to server.");
+                return false;
+            }
+        }else{
+            System.out.println(" failed, could not ping.");
+            return false;
         }
-        return false;
     }
     
     /**
