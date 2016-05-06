@@ -34,8 +34,8 @@ public class UserDao {
             }
         } catch (Exception e) {
           System.err.println("Erreur logUser in UserDao : " + e.getMessage());
-        }  
-        return null;
+          throw new RuntimeException(e);
+        }
     }
     
     public static void invitUser(String userLogin, int idO){
@@ -47,6 +47,7 @@ public class UserDao {
           preparedStmt.close();
         } catch (Exception e) {
           System.err.println("Erreur invitUser in UserDao : " + e.getMessage());
+          throw new RuntimeException(e);
         } 
     }
     
@@ -64,6 +65,7 @@ public class UserDao {
           }
         } catch (Exception e) {
           System.err.println("Erreur getListeUser in UserDao : " + e.getMessage());
+          throw new RuntimeException(e);
         }
         return al;
   }
@@ -80,6 +82,7 @@ public class UserDao {
           preparedStmt.close();
       } catch (Exception e) {
           System.err.println("Erreur deleteFriend in UserDao : " + e.getMessage());
+          throw new RuntimeException(e);
       }
   }
 }

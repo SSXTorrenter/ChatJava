@@ -32,7 +32,8 @@ public class MessageDao {
             al.add(new Message(new User(rs.getInt("idUser"), rs.getString("login")),rs.getString("text")));
           }
         } catch (Exception e) {
-          System.err.println("Erreur getListeMessage in MessageDao : " + e.getMessage());
+            System.err.println("Erreur getListeMessage in MessageDao : " + e.getMessage());
+            throw new RuntimeException(e);
         }
         return al;
   }
@@ -44,6 +45,7 @@ public class MessageDao {
           preparedStmt.execute();
       } catch (Exception e) {
           System.err.println("Erreur sendMessage in MessageDao : " + e.getMessage());
+          throw new RuntimeException(e);
       }
     }
 }

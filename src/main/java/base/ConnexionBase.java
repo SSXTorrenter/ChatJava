@@ -24,9 +24,11 @@ public class ConnexionBase {
     }
     catch (SQLException e){
         System.out.println("ConnexionBase: " + e.getMessage()); e.printStackTrace();
+        throw new RuntimeException(e);
     }
     catch (ClassNotFoundException e) {
         System.out.println("ConnexionBase: " + e.getMessage()); e.printStackTrace();
+        throw new RuntimeException(e);
     }
   } // Constructeur
 
