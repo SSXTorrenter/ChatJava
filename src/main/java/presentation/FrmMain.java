@@ -210,7 +210,7 @@ public class FrmMain extends javax.swing.JFrame {
         lblBienvenue.setText("Bienvenue " + owner.getLogin());
         lstF = new ListeUserFriends(owner.getId());
         for (int i = 0; i < lstF.size(); i++) {
-            LstAmis.add(lstF.get(i).toString());
+            LstAmis.add(lstF.get(i).getLogin());
         }
     }
 
