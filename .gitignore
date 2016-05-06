@@ -1,0 +1,8 @@
+**/.DS_Store
+target/
+src/test/
+dependency-reduced-pom.xml
+nbactions.xml
+src/main/java/ressources
+src/main/java/presentation/FrmLoading.java
+src/main/java/base/mysql/Outils.java
