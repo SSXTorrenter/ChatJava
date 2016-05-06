@@ -26,7 +26,7 @@ public class Validation {
     return true;
   } // isDoubleValid
   
-  public static boolean pingHost(String host, int port) throws UnknownHostException {
+  public static boolean pingHost(String host, int port) {
     try {
         Socket socket = new Socket();
         SocketAddress socketAddress = new InetSocketAddress(host, port);

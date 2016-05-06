@@ -9,11 +9,6 @@ import domaine.Message;
 import base.MessageDao;
 
 
-public class ListeMessage extends ListeObjects{
-  public ListeMessage (int idO, int idF) {liste = MessageDao.getListeMessage(idO,idF);}
-  
-  public Message get (int k) {return (Message)super.get(k);}
-  
-  public Message getCourant () {return (Message)super.getCourant();}
-  
+public class ListeMessage extends ListeObjects<Message>{
+  public ListeMessage (int idO, int idF) {super (MessageDao.getListeMessage(idO,idF));}
 }

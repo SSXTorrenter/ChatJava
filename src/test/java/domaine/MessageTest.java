@@ -5,10 +5,31 @@
  */
 package domaine;
 
+import org.testng.annotations.*;
+import static org.testng.Assert.*;
+
+
 /**
  *
  * @author thomas
  */
 public class MessageTest {
     
+    User user = new User(100,"userTest");
+    Message message = new Message(user,"hello");
+    
+    @Test
+    public void test_getAuthor(){
+        assertEquals(message.getAuthor(),user);
+    }
+    
+    @Test
+    public void test_getTest(){
+        assertEquals(message.getText(),"hello");
+    }
+    
+    @Test
+    public void test_toString(){
+        assertEquals(message.toString(),"userTest : hello");
+    }
 }

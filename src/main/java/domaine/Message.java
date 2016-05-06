@@ -16,7 +16,7 @@ public class Message {
   } // Constructeur
 
   /** Accesseurs */
-  public User getAutor () {return autor;}
+  public User getAuthor () {return autor;}
   public String getText () {return text;}
   
   @Override

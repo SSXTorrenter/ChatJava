@@ -38,7 +38,7 @@ public class UserDao {
         return null;
     }
     
-    public static boolean invitUser(String userLogin, int idO){
+    public static void invitUser(String userLogin, int idO){
         try {
           Connection con = ConnexionBase.get();
           PreparedStatement preparedStmt = con.prepareStatement("INSERT INTO Friendship(idUser1, idUser2) VALUES (?,(SELECT idUser FROM Users WHERE UPPER(login)=UPPER(\"?\")))");
@@ -46,11 +46,8 @@ public class UserDao {
           preparedStmt.execute();
           preparedStmt.close();
         } catch (Exception e) {
-          System.err.println("Erreur logUser in UserDao : " + e.getMessage());
-          return false;
+          System.err.println("Erreur invitUser in UserDao : " + e.getMessage());
         } 
-        
-        return true;
     }
     
     public static ArrayList getListeUser (int id) {
