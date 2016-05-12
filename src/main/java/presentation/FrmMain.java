@@ -214,6 +214,7 @@ public class FrmMain extends javax.swing.JFrame {
         }
     }
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button BtnAjoutAmi;
     private java.awt.Button BtnChatterAmi;

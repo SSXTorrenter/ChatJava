@@ -25,4 +25,7 @@ public class FrmLoadingTest {
         boolean getCon = FrmLoading.getConnection("ssxtorrenter.ddns.com",3306);
         assertFalse(getCon);
     }
+    
+    
+    
 }

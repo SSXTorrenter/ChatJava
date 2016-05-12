@@ -5,9 +5,11 @@
  */
 package base;
 
+import java.sql.SQLException;
 import org.testng.annotations.*;
 import static org.testng.Assert.*;
-import java.util.ArrayList;
+import static org.mockito.Mockito.*;
+
 
 
 /**
@@ -15,12 +17,23 @@ import java.util.ArrayList;
  * @author thomas
  */
 public class MessageDaoTest {
+    private MessageDao messageDao;
+    
+    @BeforeMethod
+    public void setupMock(){
+        messageDao = mock(MessageDao.class);
+    }
     
     @Test
-    public void test_getListeMessage_false(){
-        ArrayList listMessageTrue = MessageDao.getListeMessage(1, 3);
-        ArrayList listMessage = MessageDao.getListeMessage(1, 1);
-        assertNotEquals(listMessageTrue, listMessage);
+    public void test_sendMessage(){
+        doNothing().when(messageDao).sendMessage(1,3,"test");
     }
+    
+    @Test(enabled = false)
+    public void test_sendMessage_throw_exception(){
+        doThrow(SQLException.class).when(messageDao).sendMessage(-1,3,"test");
+    }
+    
+    
     
 }
