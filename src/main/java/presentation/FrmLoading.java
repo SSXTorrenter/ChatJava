@@ -4,19 +4,22 @@
  * @version 1.2
  */
 package presentation;
+
 import base.ConnexionBase;
-import java.net.UnknownHostException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.Connection;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import outils.Validation;
+import org.apache.log4j.Logger;
 
 public class FrmLoading extends javax.swing.JFrame {
 
     private static FrmLoading uniqueInstance = null;
-    FrmMain frmMain; 
-    public String[] ADDRESSES = {"192.168.1.205","ssxtorrenter.ddns.net"};
-    public int[] PORTS = {3306,3306};
+    FrmMain frmMain;
+    public String[] ADDRESSES = {"192.168.1.205", "ssxtorrenter.ddns.net"};//NOSONAR
+    public int[] PORTS = {3306, 3306};
+    private final static Logger LOG = Logger.getLogger(FrmLoading.class.getName());
+
     /**
      * Creates new form FrmLoading
      */
@@ -67,95 +70,62 @@ public class FrmLoading extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        if (FrmMain.CONNECTION_ESTABLISHED==false) {
+        if (FrmMain.CONNECTION_ESTABLISHED == false) {
             ConnexionBase.close();
             System.exit(0);
         }
         this.dispose();
     }//GEN-LAST:event_formWindowClosing
 
-    public static FrmLoading getInstance (FrmMain frmMain) {
-        if (uniqueInstance == null) {uniqueInstance = new FrmLoading(); uniqueInstance.frmMain = frmMain;}
+    public static FrmLoading getInstance(FrmMain frmMain) {
+        if (uniqueInstance == null) {
+            uniqueInstance = new FrmLoading();
+            uniqueInstance.frmMain = frmMain;
+        }
         return uniqueInstance;
     }
-    
-    public void tryConnection(int nbTries){
+
+    public void tryConnection(int nbTries) {
         if (nbTries < ADDRESSES.length) {
-            System.out.print("(" + nbTries + ")Trying on : " + this.ADDRESSES[nbTries] + ":" + this.PORTS[nbTries]);
-            if(!getConnection(this.ADDRESSES[nbTries], this.PORTS[nbTries])){
-                tryConnection(nbTries+=1);
-            }else{
+            LOG.info("(" + nbTries + ")Trying on : " + this.ADDRESSES[nbTries] + ":" + this.PORTS[nbTries]);
+            if (!getConnection(this.ADDRESSES[nbTries], this.PORTS[nbTries])) {
+                nbTries++;
+                tryConnection(nbTries);
+            } else {
                 this.dispose();
             }
-        }else{
-                System.out.println(" failed, no known addresses left.");
-                Object[] options = {"Fermer","Renseigner un serveur"};
-                int result = JOptionPane.showOptionDialog(this,"Immpossible de joindre le serveur.\nL'application va maintenant se fermer.\n\nOu renseignez manuellement un serveur.","Erreur",
-                       JOptionPane.PLAIN_MESSAGE,
-                       JOptionPane.QUESTION_MESSAGE,
-                       null,
-                       options,
-                       options[0]);
-                if (result==1) {
-                    FrmServer.getInstance(this).setVisible(true);
-                }else if (result == JOptionPane.OK_OPTION || result == JOptionPane.CLOSED_OPTION) {
-                    System.exit(0);
-                }
-            }   
+        } else {
+            LOG.info(" failed, no known addresses left.");
+            Object[] options = {"Fermer", "Renseigner un serveur"};
+            int result = JOptionPane.showOptionDialog(this, "Immpossible de joindre le serveur.\nL'application va maintenant se fermer.\n\nOu renseignez manuellement un serveur.", "Erreur",
+                    JOptionPane.PLAIN_MESSAGE,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0]);
+            if (result == 1) {
+                FrmServer.getInstance(this).setVisible(true);
+            } else if (result == JOptionPane.OK_OPTION || result == JOptionPane.CLOSED_OPTION) {
+                System.exit(0);
+            }
+        }
     }
-    
-    public static boolean getConnection(String address, int port){
-        FrmMain.setServer(address,port);
+
+    public static boolean getConnection(String address, int port) {
+        FrmMain.setServer(address, port);
         if (Validation.pingHost(address, port)) {
-            if (ConnexionBase.get()!=null) {
-                System.out.println(" succed.");
-                ConnexionBase.close();
+            try {
+                Connection con = ConnexionBase.get();
+                LOG.info(" succed.");
+                con.close();
                 FrmMain.setServer(address, port);
                 FrmMain.setConnectionStat(true);
                 return true;
-            }else{
-                System.out.print(" failed, could not connect to server.");
-                return false;
+            } catch (SQLException e) {
+                LOG.error(e);
             }
-        }else{
-            System.out.println(" failed, could not ping.");
-            return false;
         }
-    }
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmLoading.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmLoading.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmLoading.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmLoading.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmLoading().setVisible(true);
-            }
-        });
+        return false;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

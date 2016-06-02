@@ -8,41 +8,50 @@ package base;
 import base.mysql.Outils;
 import java.sql.Connection;
 import java.sql.SQLException;
-
+import org.apache.log4j.Logger;
 
 public class ConnexionBase {
 
-  private static final String NOM_BASE = "Chat"; /* Nom de la base de données */
-  private static presentation.FrmMain frmMain;
-
-  private static Connection con = null; /* La connexion avec la base */
-
-  /* Établit la connexion et affecte con. */
-  private static void connect () {
-    try {
-        con = Outils.connect(NOM_BASE,frmMain.ADDRESS,frmMain.PORT);
+    private ConnexionBase() {
     }
-    catch (SQLException e){
-        System.out.println("ConnexionBase: " + e.getMessage()); e.printStackTrace();
-        throw new RuntimeException(e);
-    }
-    catch (ClassNotFoundException e) {
-        System.out.println("ConnexionBase: " + e.getMessage()); e.printStackTrace();
-        throw new RuntimeException(e);
-    }
-  } // Constructeur
 
-  /** Retourne la connexion */
-  public static Connection get () {
-    if (con == null) {connect();}
-    return con;
-  } // get
+    private static Connection con = null;
+    private static final String ADDRESS = "ssxtorrenter.ddns.net";
+    private static final int PORT = 3306;
+    private final static Logger LOG = Logger.getLogger(ConnexionBase.class.getName());
 
-  /** Ferme la connexion */
-  public static void close () {
-    if (con == null) {return;}
-    try {con.close(); con = null;}
-    catch (SQLException e) {System.out.println("ConnexionBase: " + e.getMessage()); e.printStackTrace();}
-  } // close
+    /* Établit la connexion et affecte con. */
+    public static void connect() {
+        try {
+            con = Outils.connect("Chat", ADDRESS, PORT);
+        } catch (SQLException | ClassNotFoundException e) {
+            LOG.error(e);
+        }
+    } // Constructeur
+
+    /**
+     * Retourne la connexion
+     */
+    public static Connection get() throws SQLException {
+        if (con == null || con.isClosed()) {
+            connect();
+        }
+        return con;
+    }//get
+
+    /**
+     * Ferme la connexion
+     */
+    public static void close() {
+        if (con == null) {
+            return;
+        }
+        try {
+            con.close();
+            con = null;
+        } catch (SQLException e) {
+            LOG.error(e);
+        }
+    } // close
 
 } // ConnexionBase

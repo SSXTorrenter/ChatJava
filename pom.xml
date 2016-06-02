@@ -57,6 +57,11 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.0.1</version>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
@@ -81,6 +86,16 @@
             <version>6.9.10</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.5</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>
@@ -89,4 +104,16 @@
             <url>http://jcenter.bintray.com</url>
         </repository>
     </repositories>
+    <name>ChatJava</name>
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <sonar.coverage.exclusions>
+            **/FrmChat.java,
+            **/FrmLogin.java,
+            **/FrmServer.java,
+            **/FrmLoading.java,
+            **/Main.java
+        </sonar.coverage.exclusions>
+    </properties>
 </project>
