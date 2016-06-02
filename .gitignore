@@ -6,3 +6,15 @@ nbactions.xml
 src/main/java/ressources
 src/main/java/presentation/FrmLoading.java
 src/main/java/base/mysql/Outils.java
+
+.idea/compiler.xml
+
+.idea/copyright/profiles_settings.xml
+
+.idea/misc.xml
+
+.idea/modules.xml
+
+.idea/workspace.xml
+
+ChatJava.iml

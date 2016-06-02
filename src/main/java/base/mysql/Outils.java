@@ -22,7 +22,7 @@ public class Outils {
         Class.forName("com.mysql.jdbc.Driver");
         Properties props = new Properties();
         props.put("user", "chat");
-        props.put("password", "chat1801");
+        props.put("password", "chat1801");//NOSONAR
         props.put("charSet", "UTF-8");
         return DriverManager.getConnection("jdbc:mysql://" + address + ":" + port + "/" + nomBase, props);
     } // connect
