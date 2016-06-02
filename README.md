@@ -1,1 +1,3 @@
-Mini chat with connection to a MySQL database in java
+#ChatJava
+###Description :
+Mini chat in java connected to a MySQL database server
